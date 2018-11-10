@@ -3,10 +3,10 @@
 
 [DEMO](https://ymbo.github.io/yCircleMenu/preview/index.html "yCircleMenu")
 
-#### Install
+## Install
 >npm install  y-circle-menu
 
-#### Usage
+## Usage
 ```javascript
 <template>
 	<yCircleMenu 
@@ -30,7 +30,7 @@
 </script>
 ```
 
-#### configuration
+## configuration
 
 [在线配置](https://ymbo.github.io/yCircleMenu/preview/index.html "y-circle-menu")
 
