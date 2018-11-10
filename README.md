@@ -34,11 +34,10 @@
 
 [在线配置](https://ymbo.github.io/yCircleMenu/preview/index.html "y-circle-menu")
 
-![说明](https://github.com/YMBo/yCircleMenu/blob/master/static/img/dic.png)    
-
+![说明](https://github.com/YMBo/yCircleMenu/blob/master/static/img/dic.png)  
 
 | 配置项 | 一个普通标题 | 参数 | 默认 | 类型
-| ------ | ------ 
+| ------ | ------ |------- | ------ |-------|
 | circleOr | 生成圆半径附加值,放大缩小圆可用| 任意数值 | 0 | Number
 | direc   | 所有item排布的区域 | top/right/bottom/left | top | String
 | itemO  |item原点位置  | o/top/right/bottom/left | o(中心) | String 
