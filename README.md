@@ -34,7 +34,8 @@
 
 [在线配置](https://ymbo.github.io/yCircleMenu/preview/index.html "y-circle-menu")
 
-![说明](https://github.com/YMBo/yCircleMenu/blob/master/static/img/dic.png)
+![说明](https://github.com/YMBo/yCircleMenu/blob/master/static/img/dic.png)    
+
 
 | 配置项 | 一个普通标题 | 参数 | 默认 | 类型
 | ------ | ------ 
