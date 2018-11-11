@@ -1,8 +1,9 @@
 {
-    "name": "y-cicle-menu",
+    "name": "y-circle-menu",
     "version": "1.0.3",
     "description": "vue圆形展开菜单",
     "author": "https://github.com/YMBo",
+    "homepage": "https://github.com/YMBo/yCircleMenu",
     "private": false,
     "license": "ISC",
     "keywords": [

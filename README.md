@@ -25,7 +25,7 @@
 
 <script>
 	import yCircleMenu from 'y-circle-menu'
-	import  'yCircleMenu.min.css'
+	import  'y-circle-menu/dist/yCircleMenu.min.css'
 ...
 </script>
 ```
