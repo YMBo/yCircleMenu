@@ -1,3 +1,4 @@
-!preview
-!.git
-*
+.DS_Store
+.vscode/
+node_modules/
+/static/
