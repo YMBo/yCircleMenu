@@ -36,7 +36,7 @@
 
 ![说明](https://github.com/YMBo/yCircleMenu/blob/master/static/img/dic.png)  
 
-| 配置项 | 一个普通标题 | 参数 | 默认 | 类型
+| 配置项 | 描述 | 参数 | 默认 | 类型
 | ------ | ------ |------- | ------ |-------|
 | circleOr | 生成圆半径附加值,放大缩小圆可用| 任意数值 | 0 | Number
 | direc   | 所有item排布的区域 | top/right/bottom/left | top | String
@@ -46,3 +46,4 @@
 | duration| item执行时间单位秒| 任意大于0的数字 | 0.5 |Number/String
 | delay| 每个item之间的延迟时间，每个item依次累加 单位秒|任意大于0的数字 | 0.01|Number
 |isClose| 点击空白区域收起| ture/false|false| Boolean 
+|offset| 生成圆整体的偏移量（px）| 格式{x:0,y:0} | {x:0,y:0} | Object 

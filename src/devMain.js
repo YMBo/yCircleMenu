@@ -5,7 +5,6 @@ import App from './App'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import VueHighlightJS from 'vue-highlight.js';
-import 'highlight.js/styles/dark.css';
 
 Vue.config.productionTip = false
 

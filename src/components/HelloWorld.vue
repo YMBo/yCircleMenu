@@ -42,6 +42,17 @@
                 <Option value="0">否</Option>
             </Select>
           </FormItem>
+          <FormItem label="生成圆整体的偏移（px）">
+              <span>
+                  X轴：<InputNumber  v-model="offset.x"></InputNumber>
+              </span>
+              <div>
+                  Y轴：<InputNumber v-model="offset.y"></InputNumber>
+              </div>
+          </FormItem>
+          <FormItem label="主动触发">
+              <Button type="info" @click="f" shape="circle">触发</Button>
+          </FormItem>
         <span style="color:red;text-align:left">
           tip:参数变动后，重新点击开关即可<br/>
           如果遇到比如日历组件弹出内容被别的item元素遮挡，可通过<br/>
@@ -50,12 +61,14 @@
           }<br/>
           这种方式定制item格式
         </span>
+        
       </Form>
   <Button @click="value4 = true" type="primary">查看代码</Button>
     </Card>
     <!-- <pre v-highlightjs><code class="javascript"> {{this.str}}</code></pre> -->
     <span class="hello" ref="code">
       <yCircleMenu 
+            ref="menu"
           :columns='columns' 
           :circleOr='circleOr' 
           :direc='direc'
@@ -64,14 +77,14 @@
           :duration='duration'
           :delay='delay'
           :isClose='isClose==0?false:true'
+          :offset=offset
           >
         <Button type="warning" slot="button" >开关</Button>
       </yCircleMenu>
   </span>
         <Drawer :closable="false" width="640" v-model="value4">
             <div class="demo-drawer-profile">
-              <highlight-code lang="javascript" :code='code'>
-
+              <highlight-code lang="vue" :code='code'>
               </highlight-code>
             <Divider />
             <Divider />
@@ -81,9 +94,10 @@
 </template>
 
 <script>
-import yCircleMenu from './yCircleMenu.vue'
-let code=`
+import yCircleMenu from "./yCircleMenu.vue";
+let code = `
 <yCircleMenu 
+    ref="menu"
     :columns='columns' 
     :circleOr='circleOr' 
     :direc='direc'
@@ -92,9 +106,11 @@ let code=`
     :duration='duration'
     :delay='delay'
     :isClose='isClose==0?false:true'
+    :offset=offset
     >
 <Button type="warning" slot="button" >开关</Button>
 </yCircleMenu>
+<script>
 export default {
   name: 'HelloWorld',
   components:{
@@ -109,7 +125,8 @@ export default {
       itemO:'o',
       completeCircle:'0.5',
       duration:0.5,
-      delay:0.01,
+      delay: 0.01,
+      offset: { x: 0, y: 0 },
       columns: [{
           key:'aaa',
           render(h){
@@ -252,167 +269,241 @@ export default {
 .y-box-item>.item:nth-child(6){
   z-index: 555;
 }
-</style>`
+</style>`;
 export default {
-  name: 'HelloWorld',
-  components:{
+  name: "HelloWorld",
+  components: {
     yCircleMenu
   },
-  data () {
+  data() {
     return {
-      code:code,
-      value4:false,
-      isClose:'0',
-      circleOr:0,
-      direc:'top',
-      itemO:'o',
-      completeCircle:'0.5',
-      duration:0.5,
-      delay:0.01,
-      columns: [{
-          key:'aaa',
-          render(h){
-              return h('Button',{
-                props:{
-                  type:'success'
+      code: code,
+      value4: false,
+      isClose: "0",
+      circleOr: 0,
+      direc: "top",
+      itemO: "o",
+      completeCircle: "0.5",
+      duration: 0.5,
+      delay: 0.01,
+      offset: { x: 0, y: 0 },
+      columns: [
+        {
+          key: "aaa",
+          render(h) {
+            return h(
+              "Button",
+              {
+                props: {
+                  type: "success"
                 }
-              },'按钮1')
+              },
+              "按钮1"
+            );
           }
-      },{
-          key:'age',
-          render(h){
-              return h('Button',{
-                props:{
-                  type:'success'
+        },
+        {
+          key: "age",
+          render(h) {
+            return h(
+              "Button",
+              {
+                props: {
+                  type: "success"
                 }
-              },'🐂')
+              },
+              "🐂"
+            );
           }
-      },{
-          key:'dd',
-          render(h){
-              return h('Icon',{
-                props:{
-                  type:'ios-apps-outline',
-                  size:'32'
-                }
-              })
+        },
+        {
+          key: "dd",
+          render(h) {
+            return h("Icon", {
+              props: {
+                type: "ios-apps-outline",
+                size: "32"
+              }
+            });
           }
-      },{
-          key:'ddvv',
-          render(h){
-              let container=[{name:'第一'},{name:'第二'},{name:'第三'}]
-                const dom=container.map(v=>{
-                    return (
-                        h('Option',{
-                            props:{
-                                value:v.name
-                            }
-                        },v.name)
-                    )
-                })
-                return h('Select',{
-                    props:{
-                        value:container[0].name
-                    }
+        },
+        {
+          key: "ddvv",
+          render(h) {
+            let container = [
+              { name: "第一" },
+              { name: "第二" },
+              { name: "第三" }
+            ];
+            const dom = container.map(v => {
+              return h(
+                "Option",
+                {
+                  props: {
+                    value: v.name
+                  }
                 },
-                [...dom])
-            }
-      },{
-          key:'xx',
-          render(h){
-              return h('Slider',{
-                style:{
-                  'width':'100px'
+                v.name
+              );
+            });
+            return h(
+              "Select",
+              {
+                props: {
+                  value: container[0].name
+                }
+              },
+              [...dom]
+            );
+          }
+        },
+        {
+          key: "xx",
+          render(h) {
+            return h(
+              "Slider",
+              {
+                style: {
+                  width: "100px"
                 },
-                props:{
-                  value:[20, 50]
+                props: {
+                  value: [20, 50]
                 }
-              },'🏃')
+              },
+              "🏃"
+            );
           }
-      },{
-          key:'x',
-          render(h){
-              return h('DatePicker',{
-                props:{
-                  type:'date',
-                  placeholder:'Select date'
-                },
-                style:{
-                  width:'100px'
+        },
+        {
+          key: "x",
+          render(h) {
+            return h("DatePicker", {
+              props: {
+                type: "date",
+                placeholder: "Select date"
+              },
+              style: {
+                width: "100px"
+              }
+            });
+          }
+        },
+        {
+          key: "zxcv",
+          render(h) {
+            return h(
+              "Button",
+              {
+                props: {
+                  type: "success"
                 }
-              })
+              },
+              "可以放"
+            );
           }
-      },{
-          key:'zxcv',
-          render(h){
-              return h('Button',{
-                props:{
-                  type:'success'
+        },
+        {
+          key: "vse",
+          render(h) {
+            return h(
+              "Button",
+              {
+                props: {
+                  type: "success"
                 }
-              },'可以放')
+              },
+              "任何东西"
+            );
           }
-      },{
-          key:'vse',
-          render(h){
-              return h('Button',{
-                props:{
-                  type:'success'
+        },
+        {
+          key: "qwe",
+          render(h) {
+            return h(
+              "Button",
+              {
+                props: {
+                  type: "success"
                 }
-              },'任何东西')
+              },
+              "比如"
+            );
           }
-      },{
-          key:'qwe',
-          render(h){
-              return h('Button',{
-                props:{
-                  type:'success'
+        },
+        {
+          key: "asdf",
+          render(h) {
+            return h(
+              "Button",
+              {
+                props: {
+                  type: "success"
                 }
-              },'比如')
+              },
+              "表格、按钮"
+            );
           }
-      },{
-          key:'asdf',
-          render(h){
-              return h('Button',{
-                props:{
-                  type:'success'
+        },
+        {
+          key: "zsdf",
+          render(h) {
+            return h(
+              "Button",
+              {
+                props: {
+                  type: "success"
                 }
-              },'表格、按钮')
+              },
+              "图标"
+            );
           }
-      },{
-          key:'zsdf',
-          render(h){
-              return h('Button',{
-                props:{
-                  type:'success'
+        },
+        {
+          key: "zzx",
+          render(h) {
+            return h(
+              "Button",
+              {
+                props: {
+                  type: "success"
                 }
-              },'图标')
+              },
+              "✋"
+            );
           }
-      },{
-          key:'zzx',
-          render(h){
-              return h('Button',{
-                props:{
-                  type:'success'
-                }
-              },'✋')
-          }
-      }]
-    }
+        }
+      ]
+    };
   },
-  methods:{
+  methods: {
+    f() {
+      this.$refs.menu.showItemF();
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less">
-.hello{
+.hello {
   position: absolute;
   top: 50%;
   left: 60%;
   display: inline-block;
 }
-.y-box-item>.item:nth-child(6){
+.y-box-item > .item:nth-child(6) {
   z-index: 555;
+}
+.hljs-name {
+  color: #3e76f6;
+}
+.hljs-attr {
+  color: #295bc1;
+}
+.hljs-string {
+  color: #42b983;
+}
+.hljs-keyword {
+  color: #e96900;
 }
 </style>
