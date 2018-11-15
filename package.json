@@ -31,8 +31,7 @@
         "vue": "^2.5.2",
         "vue-highlight.js": "^2.2.0",
         "vue-highlightjs": "^1.3.3",
-        "vue-router": "^3.0.1",
-        "y-circle-menu": "^1.0.0"
+        "vue-router": "^3.0.1"
     },
     "devDependencies": {
         "autoprefixer": "^7.1.2",
