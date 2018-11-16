@@ -36,22 +36,19 @@
           <FormItem label="delay：每个item之间的延迟时间 单位秒（默认0.01，每个item依次累加）">
               <InputNumber :step="0.01" v-model="delay" :min="0"></InputNumber>
           </FormItem>
-          <FormItem label="点击空白区域收起（默认false）">
+          <FormItem label="isClose:点击空白区域收起（默认false）">
               <Select v-model="isClose">
                 <Option value="1">是</Option>
                 <Option value="0">否</Option>
             </Select>
           </FormItem>
-          <FormItem label="生成圆整体的偏移（px）">
+          <FormItem label="offset:生成圆整体的偏移（px）">
               <span>
                   X轴：<InputNumber  v-model="offset.x"></InputNumber>
               </span>
               <div>
                   Y轴：<InputNumber v-model="offset.y"></InputNumber>
               </div>
-          </FormItem>
-          <FormItem label="主动触发">
-              <Button type="info" @click="f" shape="circle">触发</Button>
           </FormItem>
         <span style="color:red;text-align:left">
           tip:参数变动后，重新点击开关即可<br/>

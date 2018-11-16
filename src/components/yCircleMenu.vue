@@ -1,10 +1,10 @@
 <template>
     <div class="y-box">
         <input ref="input"  v-if="isClose" class="input"  type="text" @blur="close">
-        <div class="y-box-own" @mousedown="showItemF" ref="switch">
+        <div class="y-box-own" @click="showItemF" @mousedown="down"  ref="switch">
             <slot class="button" name="button" ></slot>
         </div>
-        <ul ref='ul' class="y-box-item"  :class="showItem?'open':'close'" @mousedown="ulmousedown">
+        <ul ref='ul' class="y-box-item"  :class="showItem?'open':'close'" @mousedown="ulmousedown" @mouseup="ulmouseup">
             <li class="item" v-for="item in columns" :key="item.key">
                 <Expand :name='item.name' :render='item.render'></Expand>
             </li>
@@ -37,7 +37,8 @@ export default {
       spacing: 20,
       // 每个item宽高
       itemWH: [],
-      effective: true
+      effective: true,
+      isClick: false
     };
   },
   props: {
@@ -136,16 +137,20 @@ export default {
       this.getOr();
       this.setItemXY();
     },
+    ulmouseup() {
+      this.effective = true;
+    },
     // 点击li不收起圆
     ulmousedown(e) {
-      if (e.target && this.isClose) {
+      if (!this.isClose) {
+        return;
+      }
+      if (e.target) {
         this.effective = false;
       } else {
         this.effective = true;
       }
-      if (this.isClose) {
-        this.$refs.input.focus();
-      }
+      this.$refs.input.focus();
     },
     // 获取每个子元素宽高
     itemsWH(i) {
@@ -197,6 +202,7 @@ export default {
       this.itemMaxHeight = Math.max(...widthArr);
     },
     close(event) {
+      this.isClick = true;
       if (!this.effective) {
         this.effective = true;
         this.$refs.input.focus();
@@ -205,7 +211,14 @@ export default {
       if (!this.showItem) return;
       this.showItem = false;
     },
+    down() {
+      this.isClick = false;
+    },
     showItemF(event) {
+      if (this.isClick) {
+        this.isClick = false;
+        return;
+      }
       this.showItem = !this.showItem;
     },
     animateItem() {

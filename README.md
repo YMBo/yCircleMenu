@@ -18,6 +18,7 @@
           :duration='duration'
           :delay='delay'
           :isClose='isClose==0?false:true'
+          :offset=offset
           >
         <Button type="warning" slot="button" >开关</Button>
 	</yCircleMenu>
@@ -45,5 +46,5 @@
 | completeCircle | 是否为整圆,比较自由,1表示整圆 |1/0.5/0.25....|0.5(半圆) |  Number/String
 | duration| item执行时间单位秒| 任意大于0的数字 | 0.5 |Number/String
 | delay| 每个item之间的延迟时间，每个item依次累加 单位秒|任意大于0的数字 | 0.01|Number
-|isClose| 点击空白区域收起| ture/false|false| Boolean 
+|isClose| 自动收起| ture/false|false| Boolean 
 |offset| 生成圆整体的偏移量（px）| 格式{x:0,y:0} | {x:0,y:0} | Object 
